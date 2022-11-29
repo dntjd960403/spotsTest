@@ -52,6 +52,10 @@ app.get("/", (req, res) => {
   res.send("TEST!!!!");
 });
 
+app.get("/sibal", (req, res) => {
+  res.send("라마");
+});
+
 // ------------------ chat(socket)
 // app.set('view engine', "pug");
 // app.set("views", "./src/views");
