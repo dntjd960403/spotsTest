@@ -125,7 +125,7 @@ io.on("connection", (socket) => {
     socket.join(room);
     const roomName = room;
     const nickname = "admin";
-    const message = "안녕하세요 고객님, 생활체육 매칭 서비스 SPOTS입니다. 무엇을 도와드릴까요??";
+    const message = "안녕하세요 고객님, 생활체육 매칭 서비스 SPOTS입니다. 무엇을 도와드릴까요?";
     const data = { roomName, nickname, message };
     io.sockets.in(roomName).emit("new_message", data);
   });
