@@ -8,8 +8,7 @@ on:
 jobs:
   deploy:
     name: cd_test
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         node-version: [16.x]
