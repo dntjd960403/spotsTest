@@ -1,0 +1,28 @@
+name: cd_test
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: cd_test
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          key: ${{ secrets.CI_CD_KEY }}
+          host: ${{ secrets.CI_CD_HOST }}
+          username: ${{ secrets.CI_CD_USERNAME }}
+          port: ${{ secrets.CI_CD_PORT }}
+          script: |
+            cd ${{ secrets.CI_CD_PATH1 }}
+            cd ${{ secrets.CI_CD_PATH2 }}
+            sudo git pull origin master
+            sudo npm install
+            sudo pm2 restart app.js
