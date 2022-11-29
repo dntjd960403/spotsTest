@@ -1,7 +1,9 @@
 name: cd_test
 on:
-  pull_request:
+  push:
     branches: ["main"]
+
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,13 +18,11 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.5
         with:
-          key: ${{ secrets.CI_CD_KEY }}
-          host: ${{ secrets.CI_CD_HOST }}
-          username: ${{ secrets.CI_CD_USERNAME }}
-          port: ${{ secrets.CI_CD_PORT }}
+          key: ${{ secrets.EC2_SECRET_KEY }}
+          host: ${{ secrets.EC2_IP }}
+          username: ${{ secrets.SSH_ID }}
           script: |
-            cd ${{ secrets.CI_CD_PATH1 }}
-            cd ${{ secrets.CI_CD_PATH2 }}
-            sudo git pull origin master
+            cd ${{ secrets.UBUNTU_PATH }}
+            sudo git pull origin main
             sudo npm install
             sudo pm2 restart app.js
